@@ -17,9 +17,35 @@ app.use(express.json({ limit: '10mb' }))
 app.use(morgan('dev'))
 
 const ORIGIN = process.env.ORIGIN || '*'
-app.use(cors({ origin: ORIGIN,
+app.use(cors({
+  origin: "https://independence-day-by-ragib.onrender.com", // no slash!
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
- }))
+}));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://independence-day-by-ragib.onrender.com");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://independence-day-by-ragib.onrender.com"
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 // MongoDB
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/azaadi_mela'
