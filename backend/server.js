@@ -17,7 +17,9 @@ app.use(express.json({ limit: '10mb' }))
 app.use(morgan('dev'))
 
 const ORIGIN = process.env.ORIGIN || '*'
-app.use(cors({ origin: ORIGIN }))
+app.use(cors({ origin: ORIGIN,
+  credentials: true
+ }))
 
 // MongoDB
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/azaadi_mela'
