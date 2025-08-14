@@ -40,7 +40,10 @@ export default function Home() {
             Celebrate culture, history, and the spirit of freedom with quizzes, a virtual parade, gallery, and more.
           </p>
           <div className="mt-4 text-sm text-slate-500">
-            Countdown to 15 August: <span className="font-semibold">{daysLeft} days</span>
+            Countdown to 15 August: <span className="font-semibold">
+              {/* {daysLeft} days */}
+              Today
+              </span>
           </div>
         </div>
         <div className="flex justify-center">
